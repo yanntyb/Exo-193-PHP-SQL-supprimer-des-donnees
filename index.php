@@ -10,3 +10,18 @@
  *    --> Finalement, vous décidez de supprimer complètement la table
  *    --> Et pour finir, comme vous n'avez plus de table dans la base de données, vous décidez de supprimer aussi la base de données.
  */
+
+
+try {
+    $pdo = new PDO('mysql:host=localhost;dbname=exo193', "root", "");
+    $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+    $req = $pdo->prepare("DELETE FROM exo193.user WHERE id=4");
+    $req->execute();
+    $pdo->prepare("TRUNCATE TABLE exo193.user")->execute();
+    $pdo->prepare("DROP DATABASE exo193")->execute();
+}
+
+catch(PDOException $e){
+    echo $e->getMessage();
+}
+
